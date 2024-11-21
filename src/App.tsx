@@ -2,18 +2,10 @@ import './App.css'
 import Navigation from "./components/Navigation.tsx";
 import Body from "./components/Body.tsx";
 import {useState} from "react";
+import {UserInterface} from "./utils/types.d.ts";
+import {StatsInterface} from "./utils/types.d.ts";
+import {TwitterContextValue} from "./utils/types.d.ts";
 import {TwitterContext} from "./utils/context.ts";
-
-
-interface UserInterface {
-    name: string,
-    avatar: string,
-} 
-
-interface StatsInterface {
-    followers: number,
-    following: number,
-} 
 
 
 function App() {
@@ -27,11 +19,11 @@ function App() {
         following: 0
     });
 
-    const changeAvatar = (avatar: string) => {
+    const changeAvatar = (avatar: string | null) => {
 	setUser( prevState => ({...prevState, avatar: avatar || prevState.avatar}) );
     }
 
-    const changeName = (name: string) => {
+    const changeName = (name: string | null) => {
 	setUser( prevState => ({...prevState, name: name || prevState.name}) );
     }
 
@@ -49,7 +41,7 @@ function App() {
         <div className={'app'}>
             <TwitterContext.Provider value={{
                 user, changeAvatar,  changeName, stats, changeFollowers, changeFollowing
-            }}>
+            } as TwitterContextValue}>
                 <Navigation/>
                 <Body/>
             </TwitterContext.Provider>

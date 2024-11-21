@@ -6,7 +6,7 @@ interface AvatarProps {
 }
 
 const Avatar = ({size}:AvatarProps) => {
-    const {user, changeAvatar,  changeName} = useContext(TwitterContext);
+    const {user, changeAvatar,  changeName} = useContext(TwitterContext) as TwitterContextValue;
 
     return (
         <img className={`user-avatar ${size ?? ''}`} src={user.avatar} alt={user.name} 
